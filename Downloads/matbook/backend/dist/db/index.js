@@ -1,0 +1,18 @@
+import * as Sqlite from "better-sqlite3";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const Database = Sqlite.default || Sqlite;
+const dbPath = path.resolve(__dirname, "../../database.sqlite");
+const db = new Database(dbPath);
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS submissions (
+    id TEXT PRIMARY KEY,
+    data TEXT NOT NULL,
+    createdAt TEXT NOT NULL
+  )
+`;
+db.exec(createTableQuery);
+export default db;
+//# sourceMappingURL=index.js.map
